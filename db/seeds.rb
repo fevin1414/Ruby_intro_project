@@ -1,7 +1,36 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+require 'faker'
+require 'uri'
+require 'net/http'
+
+# Seed fake data using Faker
+100.times do
+  Match.create!(
+    date: Faker::Date.between(from: 1.year.ago, to: Date.today),
+    home_team: Faker::Team.name,
+    away_team: Faker::Team.name,
+    stadium: Faker::Sports::Football.stadium
+  )
+end
+
+# Retrieve data from the API
+url = URI("https://free-football-soccer-videos1.p.rapidapi.com/v1/")
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+
+request = Net::HTTP::Get.new(url)
+request["X-RapidAPI-Key"] = 'a93d74b2bemshfa679349444da06p1d6893jsna4d5831e5bde'
+request["X-RapidAPI-Host"] = 'free-football-soccer-videos1.p.rapidapi.com'
+
+response = http.request(request)
+matches_data = JSON.parse(response.read_body)
+
+# Store the retrieved match data in the Matches table
+matches_data.each do |match_data|
+  Match.create!(
+    date: match_data['date'],
+    home_team: match_data['home_team'],
+    away_team: match_data['away_team'],
+    stadium: match_data['stadium']
+  )
+end
