@@ -3,7 +3,7 @@ require 'uri'
 require 'net/http'
 
 # Seed fake data using Faker
-100.times do
+200.times do
   Match.seed(
     date: Faker::Date.between(from: 1.year.ago, to: Date.today),
     home_team: Faker::Sports::Football.team,
