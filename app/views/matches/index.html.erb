@@ -3,5 +3,7 @@
   <p>Home Team: <%= match.home_team %></p>
   <p>Away Team: <%= match.away_team %></p>
   <p>Stadium: <%= match.stadium %></p>
+  <%= link_to "View Details", match_path(match) %>
+
   <hr>
 <% end %>

@@ -1,0 +1,40 @@
+<h1>Match Details</h1>
+
+<p>Date: <%= @match.date %></p>
+<p>Home Team: <%= @match.home_team %></p>
+<p>Away Team: <%= @match.away_team %></p>
+<p>Stadium: <%= @match.stadium %></p>
+
+<hr>
+
+<h2>Football Details</h2>
+
+<% if @match.api_id.present? %>
+  <% url = URI("https://free-football-soccer-videos1.p.rapidapi.com/v1/match/#{@match.api_id}") %>
+  <% http = Net::HTTP.new(url.host, url.port) %>
+  <% http.use_ssl = true %>
+  <% request = Net::HTTP::Get.new(url) %>
+  <% request["X-RapidAPI-Key"] = 'a93d74b2bemshfa679349444da06p1d6893jsna4d5831e5bde' %>
+  <% request["X-RapidAPI-Host"] = 'free-football-soccer-videos1.p.rapidapi.com' %>
+  <% response = http.request(request) %>
+  <% football_data = JSON.parse(response.read_body) %>
+
+  <h3>Match Highlights</h3>
+  <% if football_data['highlights'].present? %>
+    <% football_data['highlights'].each do |highlight| %>
+      <p><%= highlight['title'] %></p>
+      <p><%= highlight['description'] %></p>
+      <p><%= highlight['video_url'] %></p>
+      <hr>
+    <% end %>
+  <% else %>
+    <p>No highlights available for this match.</p>
+  <% end %>
+<% else %>
+  <p>No API data available for this match.</p>
+<% end %>
+
+<hr>
+
+<h3>Random Soccer Data</h3>
+<p>Some random soccer data here...</p>

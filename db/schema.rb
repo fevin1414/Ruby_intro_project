@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_11_182620) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_11_191938) do
   create_table "goals", force: :cascade do |t|
     t.integer "match_id", null: false
     t.string "player_name"
@@ -27,6 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_11_182620) do
     t.string "stadium"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "api_id"
   end
 
   add_foreign_key "goals", "matches"
