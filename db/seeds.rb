@@ -4,11 +4,11 @@ require 'net/http'
 
 # Seed fake data using Faker
 100.times do
-  Match.create!(
+  Match.seed(
     date: Faker::Date.between(from: 1.year.ago, to: Date.today),
-    home_team: Faker::Team.name,
-    away_team: Faker::Team.name,
-    stadium: Faker::Sports::Football.stadium
+    home_team: Faker::Sports::Football.team,
+    away_team: Faker::Sports::Football.team,
+    stadium: Faker::Address.unique.city + " Stadium"
   )
 end
 
@@ -27,7 +27,7 @@ matches_data = JSON.parse(response.read_body)
 
 # Store the retrieved match data in the Matches table
 matches_data.each do |match_data|
-  Match.create!(
+  Match.seed(
     date: match_data['date'],
     home_team: match_data['home_team'],
     away_team: match_data['away_team'],
