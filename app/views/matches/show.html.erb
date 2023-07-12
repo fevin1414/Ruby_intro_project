@@ -19,16 +19,17 @@
   <% response = http.request(request) %>
   <% football_data = JSON.parse(response.read_body) %>
 
-  <h3>Match Highlights</h3>
-  <% if football_data['highlights'].present? %>
-    <% football_data['highlights'].each do |highlight| %>
-      <p><%= highlight['title'] %></p>
-      <p><%= highlight['description'] %></p>
-      <p><%= highlight['video_url'] %></p>
+  <% if football_data.present? %>
+    <h3>Match Highlights</h3>
+    <% football_data.each do |data| %>
+      <p>Title: <%= data['title'] %></p>
+      <p>Embed: <%= data['embed'] %></p>
+      <p>URL: <%= data['url'] %></p>
+      <p>Thumbnail: <%= data['thumbnail'] %></p>
       <hr>
     <% end %>
   <% else %>
-    <p>No highlights available for this match.</p>
+    <p>No football data available for this match.</p>
   <% end %>
 <% else %>
   <p>No API data available for this match.</p>
@@ -37,4 +38,4 @@
 <hr>
 
 <h3>Random Soccer Data</h3>
-<p>Some random soccer data here...</p>
+<p>Some random soccer data click here...</p>
