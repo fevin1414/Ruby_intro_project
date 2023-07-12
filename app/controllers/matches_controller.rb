@@ -1,6 +1,7 @@
 class MatchesController < ApplicationController
   def index
-    @matches = Match.all
+    @matches = Match.paginate(page: params[:page], per_page: 50)
+
   end
 
   def show
