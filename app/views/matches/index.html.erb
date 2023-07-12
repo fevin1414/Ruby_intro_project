@@ -1,12 +1,26 @@
-<% @matches.each do |match| %>
-  <p>Date: <%= match.date %></p>
-  <p>Home Team: <%= match.home_team %></p>
-  <p>Away Team: <%= match.away_team %></p>
-  <p>Stadium: <%= match.stadium %></p>
-  <%= link_to "View Details", match_path(match) %>
-
-  <hr>
-
-
-<% end %>
-
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Date</th>
+      <th>Home Team</th>
+      <th>Away Team</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% index = 1 %>
+    <% @matches.each do |match| %>
+      <% if match.home_team.present? && match.away_team.present? %>
+        <tr>
+          <td><%= index %></td>
+          <td><%= match.date %></td>
+          <td><%= match.home_team %></td>
+          <td><%= match.away_team %></td>
+          <td><%= link_to "View", match_path(match) %></td>
+        </tr>
+        <% index += 1 %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

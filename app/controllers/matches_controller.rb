@@ -5,6 +5,8 @@ class MatchesController < ApplicationController
 
   def show
     @match = Match.find(params[:id])
+    @home_team = @match.home_team
+  @away_team = @match.away_team
   end
 
 
