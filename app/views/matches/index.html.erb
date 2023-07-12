@@ -1,4 +1,3 @@
-
 <h1>Matches</h1>
 
 <%= form_tag(matches_path, method: :get, id: "searchForm") do %>
@@ -6,32 +5,39 @@
   <%= submit_tag("Search") %>
 <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Date</th>
-      <th>Home Team</th>
-      <th>Away Team</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% index = 1 %>
-    <% @matches.each do |match| %>
-      <% if match.home_team.present? && match.away_team.present? %>
-        <tr>
-          <td><%= index %></td>
-          <td><%= match.date %></td>
-          <td><%= match.home_team %></td>
-          <td><%= match.away_team %></td>
-          <td><%= link_to "View", match_path(match) %></td>
-        </tr>
-        <% index += 1 %>
+<% if @matches.present? %>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Date</th>
+        <th>Home Team</th>
+        <th>Away Team</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% index = 1 %>
+      <% @matches.each do |match| %>
+        <% if match.home_team.present? && match.away_team.present? %>
+          <tr>
+            <td><%= index %></td>
+            <td><%= match.date %></td>
+            <td><%= match.home_team %></td>
+            <td><%= match.away_team %></td>
+            <td><%= link_to "View", match_path(match) %></td>
+          </tr>
+          <% index += 1 %>
+        <% end %>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
-<%= will_paginate @matches %>
+    </tbody>
+  </table>
+  <%= will_paginate @matches %>
 
-
+<% else %>
+  <% if params[:search].present? %>
+    <p>No results for '<%= params[:search] %>'.</p>
+  <% else %>
+    <p>No matches found.</p>
+  <% end %>
+<% end %>
