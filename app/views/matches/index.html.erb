@@ -1,3 +1,11 @@
+
+<h1>Matches</h1>
+
+<%= form_tag(matches_path, method: :get, id: "searchForm") do %>
+  <%= text_field_tag(:search, params[:search], placeholder: "Search") %>
+  <%= submit_tag("Search") %>
+<% end %>
+
 <table>
   <thead>
     <tr>
