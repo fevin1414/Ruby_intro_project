@@ -1,8 +1,12 @@
-<h1>About Page</h1>
-<p>This Ruby on Rails project was developed as part of my third semester at Red River Polytechnic. For this project, I utilized the Faker gem to generate fake data and populate the database with realistic information.
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+     <p>This Ruby on Rails project was developed as part of my third semester at Red River Polytechnic. For this project, I utilized the Faker gem to generate fake data and populate the database with realistic information.</p>
+  <p>The dataset consists of two main tables: "matches" and "goals". The "matches" table represents soccer matches and contains columns such as id, date, home_team, away_team, stadium, created_at, updated_at, and an optional api_id. On the other hand, the "goals" table stores information about the goals scored in those matches, including the id, match_id (foreign key referencing the matches table), player_name, minute, created_at, and updated_at.</p>
+  <p>The relationship between these tables is a one-to-many association. This means that a single match can have multiple goals associated with it. The foreign key "match_id" in the goals table establishes the connection between a goal and its corresponding match. By querying the goals table and filtering by the match_id, you can retrieve the goals associated with a specific match. Conversely, you can access the match associated with a goal by utilizing the match association defined in the Goal model.</p>
+  <p>This association enables you to effectively retrieve and manipulate data based on the relationship between matches and goals. Whether you want to view the goals scored in a particular match or retrieve the match information for a specific goal, the one-to-many relationship between the matches and goals tables allows for efficient data retrieval and analysis.</p>
+    </div>
+    <%= image_tag 'diagram.png', alt: 'Project Image', class: 'img-fluid' %>
 
-The dataset consists of two main tables: "matches" and "goals". The "matches" table represents soccer matches and contains columns such as id, date, home_team, away_team, stadium, created_at, updated_at, and an optional api_id. On the other hand, the "goals" table stores information about the goals scored in those matches, including the id, match_id (foreign key referencing the matches table), player_name, minute, created_at, and updated_at.
-
-The relationship between these tables is a one-to-many association. This means that a single match can have multiple goals associated with it. The foreign key "match_id" in the goals table establishes the connection between a goal and its corresponding match. By querying the goals table and filtering by the match_id, you can retrieve the goals associated with a specific match. Conversely, you can access the match associated with a goal by utilizing the match association defined in the Goal model.
-
-This association enables you to effectively retrieve and manipulate data based on the relationship between matches and goals. Whether you want to view the goals scored in a particular match or retrieve the match information for a specific goal, the one-to-many relationship between the matches and goals tables allows for efficient data retrieval and analysis.</p>
+  </div>
+</div>
