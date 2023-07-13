@@ -1,2 +1,4 @@
 <h1>About Page</h1>
-<p>This is the About page content.</p>
+<p>This is my first Ruby On Rails project I did for my third semester in Red River Polyetchnic. In terms of associations, the ERD diagram indicates that there is a one-to-many relationship between the matches and goals tables. The goals table has a foreign key match_id referencing the matches table, indicating that a match can have multiple goals.
+
+The match_id column in the goals table references the id column in the matches table. This establishes the association between the two tables.you can access the goals associated with a match by querying the goals table and filtering by the match_id of the desired match.Conversely, you can access the match associated with a goal by using the match association defined in the Goal model. Overall, the one-to-many relationship between the matches and goals tables allows you to establish a connection between matches and their corresponding goals, enabling you to retrieve and manipulate the data based on this association.</p>
