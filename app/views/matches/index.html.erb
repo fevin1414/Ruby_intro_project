@@ -1,43 +1,51 @@
-<h1>Matches</h1>
+<div class="container">
+  <h1>Matches</h1>
 
-<%= form_tag(matches_path, method: :get, id: "searchForm") do %>
-  <%= text_field_tag(:search, params[:search], placeholder: "Search") %>
-  <%= submit_tag("Search") %>
-<% end %>
-
-<% if @matches.present? %>
-  <table>
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Date</th>
-        <th>Home Team</th>
-        <th>Away Team</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% index = 1 %>
-      <% @matches.each do |match| %>
-        <% if match.home_team.present? && match.away_team.present? %>
-          <tr>
-            <td><%= index %></td>
-            <td><%= match.date %></td>
-            <td><%= match.home_team %></td>
-            <td><%= match.away_team %></td>
-            <td><%= link_to "View", match_path(match) %></td>
-          </tr>
-          <% index += 1 %>
-        <% end %>
-      <% end %>
-    </tbody>
-  </table>
-  <%= will_paginate @matches %>
-
-<% else %>
-  <% if params[:search].present? %>
-    <p>No results for '<%= params[:search] %>'.</p>
-  <% else %>
-    <p>No matches found.</p>
+  <%= form_tag(matches_path, method: :get, id: "searchForm", class: "mb-3") do %>
+    <div class="input-group">
+      <%= text_field_tag(:search, params[:search], placeholder: "Search", class: "form-control") %>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
   <% end %>
-<% end %>
+
+  <% if @matches.present? %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Date</th>
+          <th>Home Team</th>
+          <th>Away Team</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% index = 1 %>
+        <% @matches.each do |match| %>
+          <% if match.home_team.present? && match.away_team.present? %>
+            <tr>
+              <td><%= index %></td>
+              <td><%= match.date %></td>
+              <td><%= match.home_team %></td>
+              <td><%= match.away_team %></td>
+              <td><%= link_to "View", match_path(match), class: "btn btn-primary" %></td>
+            </tr>
+            <% index += 1 %>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @matches, class: "pagination justify-content-center" %>
+
+  <% else %>
+    <% if params[:search].present? %>
+      <div class="alert alert-info" role="alert">
+        No results for '<%= params[:search] %>'.
+      </div>
+    <% else %>
+      <div class="alert alert-info" role="alert">
+        No matches found.
+      </div>
+    <% end %>
+  <% end %>
+</div>

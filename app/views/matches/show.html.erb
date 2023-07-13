@@ -1,9 +1,31 @@
 <h1>Match Details</h1>
-
 <p>Date: <%= @match.date %></p>
 <p>Home Team: <%= @match.home_team %></p>
 <p>Away Team: <%= @match.away_team %></p>
 <p>Stadium: <%= @match.stadium %></p>
+
+<h3>Goals</h3>
+<% if @match.goals.present? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Player Name</th>
+        <th>Minute</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @match.goals.each do |goal| %>
+        <tr>
+          <td><%= goal.player_name %></td>
+          <td><%= goal.minute %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No goals scored in this match.</p>
+<% end %>
+
 
 <hr>
 

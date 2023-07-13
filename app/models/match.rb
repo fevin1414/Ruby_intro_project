@@ -1,5 +1,5 @@
 class Match < ApplicationRecord
-  has_many :goals
+  has_many :goals, dependent: :destroy
 
   validates :date, presence: true
   validates :home_team, presence: true

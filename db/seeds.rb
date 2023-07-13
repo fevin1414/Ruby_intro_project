@@ -1,6 +1,3 @@
-require 'faker'
-
-# Seed fake data using Faker
 max_records = 300
 
 while Match.count < max_records
@@ -16,5 +13,7 @@ while Match.count < max_records
     stadium: Faker::Address.unique.city + " Stadium"
   )
 
-  match.save
+  if match.save
+    Goal.seed_random_goals(match)
+  end
 end
